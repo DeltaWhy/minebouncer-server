@@ -9,7 +9,10 @@ gem 'rails-api'
 gem 'sqlite3'
 
 # Authentication
-gem 'devise'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Testing
-gem 'rspec'
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'rspec-rails', '~> 2.0'
+end
