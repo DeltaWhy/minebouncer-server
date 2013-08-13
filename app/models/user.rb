@@ -5,5 +5,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true
   validates :username, presence: true, format: /\A[^\s]+\z/
 
-
+  def confirmed?
+    !!confirmed_at
+  end
 end

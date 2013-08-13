@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate, only: [:index]
   # GET /users
   # GET /users.json
   def index
