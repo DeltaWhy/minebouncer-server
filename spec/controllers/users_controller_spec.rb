@@ -26,6 +26,14 @@ describe UsersController do
     end
   end
 
+  describe "GET /profile" do
+    it "gets the current user" do
+      sign_in user
+      get :show, valid_session
+      assigns(:user).should eq(user)
+    end
+  end
+
   describe "POST create" do
     describe "with valid params" do
       it "creates a new User" do

@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    params[:id] ||= current_user.to_param
     @user = User.find(params[:id])
 
     render json: @user
