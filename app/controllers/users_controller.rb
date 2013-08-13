@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate, only: [:index]
+  before_action :authenticate, except: [:create]
+
   # GET /users
   # GET /users.json
   def index
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    @user = User.new(params.require(:user).permit(:email, :password, :password_confirmation, :username))
 
     if @user.save
       render json: @user, status: :created, location: @user
@@ -33,10 +34,14 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    if @user.update(params[:user])
-      head :no_content
+    if current_user.admin? || current_user == @user
+      if @user.update(params.require(:user).permit(:email, :password, :password_confirmation, :username))
+        head :no_content
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
     else
-      render json: @user.errors, status: :unprocessable_entity
+      head :forbidden
     end
   end
 
@@ -44,8 +49,12 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    if current_user.admin? || current_user == @user
+      @user.destroy
 
-    head :no_content
+      head :no_content
+    else
+      head :forbidden
+    end
   end
 end

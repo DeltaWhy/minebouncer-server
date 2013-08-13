@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include ActionController::StrongParameters
   include ActionController::HttpAuthentication::Basic::ControllerMethods
 
   def authenticate
