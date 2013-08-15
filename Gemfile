@@ -8,7 +8,8 @@ gem 'active_model_serializers'
 gem 'figaro'
 
 # Database
-gem 'sqlite3'
+gem 'sqlite3', group: [:development, :test]
+gem 'pg', group: [:production]
 
 # Authentication
 gem 'bcrypt-ruby', '~> 3.0.0'
