@@ -72,6 +72,7 @@ describe GamesController do
       post :create
       assigns(:game).should be_a(Game)
       assigns(:game).user.should eq(user)
+      assigns(:game).should be_persisted
     end
 
     it 'chooses a port' do

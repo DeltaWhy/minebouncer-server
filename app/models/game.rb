@@ -7,11 +7,11 @@ class Game < ActiveRecord::Base
 
   private
   def choose_port
-    host = ENV["TUNNEL_HOST"] if host.blank?
+    self.host = ENV["TUNNEL_HOST"] if self.host.blank?
     while self.port.blank?
       try_port = (1024..65535).to_a.sample
-      #puts("trying #{host} #{try_port}")
-      unless is_open?(host, try_port)
+      #puts("trying #{self.host} #{try_port}")
+      unless is_open?(self.host, try_port)
         self.port = try_port
       end
     end
