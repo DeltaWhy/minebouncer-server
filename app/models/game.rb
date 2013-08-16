@@ -2,6 +2,7 @@ class Game < ActiveRecord::Base
   belongs_to :user
   validates :host, presence: true
   validates :port, presence: true, inclusion: 1024..65535
+  validates :motd, presence: true
 
   before_validation :choose_port, on: :create
 

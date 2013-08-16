@@ -29,7 +29,7 @@ class GamesController < ApplicationController
     end
 
     if current_user.admin? || @user == current_user
-      @game = @user.games.create
+      @game = @user.games.create(params.require(:game).permit(:motd))
       render json: @game, status: :created, location: @game
     else
       head :forbidden

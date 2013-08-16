@@ -5,5 +5,6 @@ FactoryGirl.define do
     user
     host "localhost"
     port 25565
+    motd "Player - test game"
   end
 end

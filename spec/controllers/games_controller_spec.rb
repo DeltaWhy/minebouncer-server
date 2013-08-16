@@ -69,7 +69,7 @@ describe GamesController do
   describe '#create' do
     it 'creates a game' do
       sign_in user
-      post :create
+      post :create, game: {motd: 'Player - test'}
       assigns(:game).should be_a(Game)
       assigns(:game).user.should eq(user)
       assigns(:game).should be_persisted
@@ -77,7 +77,7 @@ describe GamesController do
 
     it 'chooses a port' do
       sign_in user
-      post :create
+      post :create, game: {motd: 'Player - test'}
       (1024..65535).should include(assigns(:game).port)
     end
   end
