@@ -9,4 +9,10 @@ describe User do
     @user.email = "steve@example.com"
     @user.should be_valid
   end
+
+  it "downloads an avatar" do
+    expect {
+      FactoryGirl.create(:user, username: "DeltaWhy")
+    }.to change{AvatarWorker.jobs.size}
+  end
 end

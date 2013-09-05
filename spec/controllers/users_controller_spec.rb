@@ -36,7 +36,6 @@ describe UsersController do
       sign_in user
       get :show, {:id => user.to_param}, valid_session
       res = JSON.parse(response.body)
-      p res['user']
       res['user'].should include('avatar')
     end
   end
