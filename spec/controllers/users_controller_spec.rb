@@ -24,6 +24,21 @@ describe UsersController do
       get :show, {:id => user.to_param}, valid_session
       assigns(:user).should eq(user)
     end
+
+    it "doesn't show password" do
+      sign_in user
+      get :show, {:id => user.to_param}, valid_session
+      res = JSON.parse(response.body)
+      res['user'].should_not include('password_digest')
+    end
+
+    it "includes avatar URLs" do
+      sign_in user
+      get :show, {:id => user.to_param}, valid_session
+      res = JSON.parse(response.body)
+      p res['user']
+      res['user'].should include('avatar')
+    end
   end
 
   describe "GET /profile" do
