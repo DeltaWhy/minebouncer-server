@@ -16,6 +16,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Other
 gem 'carrierwave'
+gem 'fog'
 gem 'mini_magick'
 gem 'sidekiq'
 
